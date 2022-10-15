@@ -18,13 +18,14 @@ import java.util.Date;
 @Table(name = "showtime")
 public class ShowTime {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long showtimeId;
 
     @Column(name = "showtime_code")
     private String showtimeCode;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_showtime")
     private LocalDate dateShowtime;
 

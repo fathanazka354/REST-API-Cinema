@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/movie")
@@ -18,6 +19,11 @@ public class MovieController {
     @GetMapping("/{id}")
     public ResponseEntity<Movie> getMovieById(@PathVariable Long id){
         return new ResponseEntity<>(movieService.getMovieById(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/{movieId}/genres")
+    public ResponseEntity<Set<Genre>> getEnrolledMovies(@PathVariable Long movieId){
+        return new ResponseEntity<>(movieService.getEnrolledGenres(movieId), HttpStatus.OK);
     }
 
     @GetMapping

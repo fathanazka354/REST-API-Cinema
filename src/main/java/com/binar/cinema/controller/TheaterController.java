@@ -1,8 +1,6 @@
 package com.binar.cinema.controller;
 
-import com.binar.cinema.entity.ShowTime;
 import com.binar.cinema.entity.Theater;
-import com.binar.cinema.service.ShowTimeService;
 import com.binar.cinema.service.TheaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -2,6 +2,7 @@ package com.binar.cinema.controller;
 
 import com.binar.cinema.entity.Employee;
 import com.binar.cinema.entity.Genre;
+import com.binar.cinema.entity.Movie;
 import com.binar.cinema.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/genre")
@@ -28,6 +30,16 @@ public class GenreController {
     @PostMapping
     public ResponseEntity<Genre> postGenre(@RequestBody Genre genre){
         return new ResponseEntity<>(genreService.saveGenre(genre), HttpStatus.OK);
+    }
+
+    @PutMapping("/{genreId}/movie/{movieId}")
+    public ResponseEntity<Genre> putGenreToMovie(@PathVariable Long genreId,@PathVariable Long movieId){
+        return new ResponseEntity<>(genreService.addGenreToMovie(movieId, genreId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{genreId}/movies")
+    public ResponseEntity<Set<Movie>> getGenreToMovie(@PathVariable Long genreId){
+        return new ResponseEntity<>(genreService.getEnrolledMovies(genreId), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
