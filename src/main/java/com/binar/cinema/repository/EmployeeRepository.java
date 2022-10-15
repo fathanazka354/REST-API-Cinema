@@ -1,4 +1,7 @@
 package com.binar.cinema.repository;
 
-public interface EmployeeRepository {
+import com.binar.cinema.entity.Employee;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }

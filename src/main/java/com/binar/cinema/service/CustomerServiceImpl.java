@@ -3,5 +3,5 @@ package com.binar.cinema.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerServiceImpl {
+public class CustomerServiceImpl implements CustomerService {
 }

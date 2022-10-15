@@ -1,4 +1,7 @@
 package com.binar.cinema.repository;
 
-public interface PaymentRepository {
+import com.binar.cinema.entity.Payment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PaymentRepository extends JpaRepository<Payment, Long> {
 }

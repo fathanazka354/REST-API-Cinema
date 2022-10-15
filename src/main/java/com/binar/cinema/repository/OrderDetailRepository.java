@@ -1,4 +1,7 @@
 package com.binar.cinema.repository;
 
-public interface OrderDetailRepository {
+import com.binar.cinema.entity.OrderDetail;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
 }

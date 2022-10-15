@@ -1,4 +1,7 @@
 package com.binar.cinema.repository;
 
-public interface ShowTimeRepository {
+import com.binar.cinema.entity.ShowTime;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ShowTimeRepository extends JpaRepository<ShowTime, Long> {
 }
