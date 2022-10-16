@@ -1,7 +1,9 @@
 package com.binar.cinema.service;
 
+import com.binar.cinema.entity.Payment;
 import com.binar.cinema.entity.Seat;
 import com.binar.cinema.entity.Theater;
+import com.binar.cinema.exception.DataNotFoundException;
 import com.binar.cinema.repository.SeatRepository;
 import com.binar.cinema.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,8 @@ public class SeatServiceImpl implements SeatService{
 
     @Override
     public Seat getSeatById(Long id) {
-        return seatRepository.findById(id).get();
+        Optional<Seat> entity = seatRepository.findById(id);
+        return unwrapSeat(entity, id);
     }
 
     @Override
@@ -35,12 +38,15 @@ public class SeatServiceImpl implements SeatService{
 
     @Override
     public void deleteSeat(Long id) {
+        Optional<Seat> entity = seatRepository.findById(id);
+        unwrapSeat(entity, id);
         seatRepository.deleteById(id);
     }
 
     @Override
     public Seat addSeatToTheater(Long seatId, Long theaterId) {
-        Seat seat = getSeatById(seatId);
+        Optional<Seat> entity = seatRepository.findById(seatId);
+        Seat seat = unwrapSeat(entity, seatId);
         Optional<Theater> theater = theaterRepository.findById(theaterId);
         if (theater.isPresent()){
             seat.setTheater(theater.get());
@@ -51,7 +57,13 @@ public class SeatServiceImpl implements SeatService{
 
     @Override
     public Theater getEnrolledTheater(Long seatId) {
-        Seat seat = getSeatById(seatId);
+        Optional<Seat> entity = seatRepository.findById(seatId);
+        Seat seat = unwrapSeat(entity, seatId);
         return seat.getTheater();
+    }
+
+    static Seat unwrapSeat(Optional<Seat> entity, Long id){
+        if (entity.isPresent()) return entity.get();
+        throw new DataNotFoundException(id);
     }
 }

@@ -1,11 +1,14 @@
 package com.binar.cinema.service;
 
+import com.binar.cinema.entity.Seat;
 import com.binar.cinema.entity.Theater;
+import com.binar.cinema.exception.DataNotFoundException;
 import com.binar.cinema.repository.TheaterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TheaterServiceImpl implements TheaterService{
@@ -13,7 +16,8 @@ public class TheaterServiceImpl implements TheaterService{
     TheaterRepository theaterRepository;
     @Override
     public Theater getTheaterById(Long id) {
-        return theaterRepository.findById(id).get();
+        Optional<Theater> entity = theaterRepository.findById(id);
+        return unwrapTheater(entity, id);
     }
 
     @Override
@@ -28,6 +32,12 @@ public class TheaterServiceImpl implements TheaterService{
 
     @Override
     public void deleteTheater(Long id) {
+        Optional<Theater> entity = theaterRepository.findById(id);
+        unwrapTheater(entity, id);
         theaterRepository.deleteById(id);
+    }
+    static Theater unwrapTheater(Optional<Theater> entity, Long id){
+        if (entity.isPresent()) return entity.get();
+        throw new DataNotFoundException(id);
     }
 }

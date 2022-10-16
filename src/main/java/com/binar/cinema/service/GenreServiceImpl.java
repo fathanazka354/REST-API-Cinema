@@ -1,7 +1,9 @@
 package com.binar.cinema.service;
 
+import com.binar.cinema.entity.Employee;
 import com.binar.cinema.entity.Genre;
 import com.binar.cinema.entity.Movie;
+import com.binar.cinema.exception.DataNotFoundException;
 import com.binar.cinema.repository.GenreRepository;
 import com.binar.cinema.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ public class GenreServiceImpl implements GenreService{
     MovieRepository movieRepository;
     @Override
     public Genre getGenreById(Long id) {
-        return genreRepository.findById(id).get();
+        Optional<Genre> entity = genreRepository.findById(id);
+        return unwrapGenre(entity, id);
     }
 
     @Override
@@ -53,5 +56,10 @@ public class GenreServiceImpl implements GenreService{
     public Set<Movie> getEnrolledMovies(Long id) {
         Genre genre = getGenreById(id);
         return genre.getMovies();
+    }
+
+    static Genre unwrapGenre(Optional<Genre> entity, Long id){
+        if (entity.isPresent()) return entity.get();
+        throw new DataNotFoundException(id);
     }
 }

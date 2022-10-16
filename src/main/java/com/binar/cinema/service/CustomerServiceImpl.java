@@ -1,11 +1,13 @@
 package com.binar.cinema.service;
 
 import com.binar.cinema.entity.Customer;
+import com.binar.cinema.exception.DataNotFoundException;
 import com.binar.cinema.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -13,7 +15,8 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerRepository customerRepository;
     @Override
     public Customer getCustomerById(Long id) {
-        return customerRepository.findById(id).get();
+        Optional<Customer> customer =customerRepository.findById(id);
+        return unwrapCustomer(customer, id);
     }
 
     @Override
@@ -29,5 +32,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(Long id) {
         customerRepository.deleteById(id);
+    }
+
+    static Customer unwrapCustomer(Optional<Customer> entity, Long id){
+        if (entity.isPresent()) return entity.get();
+        else throw new DataNotFoundException(id);
     }
 }

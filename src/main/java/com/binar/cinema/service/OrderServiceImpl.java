@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static com.binar.cinema.service.PaymentServiceImpl.unwrapPayment;
+
 @Service
 public class OrderServiceImpl implements OrderService{
     @Autowired
@@ -22,7 +24,8 @@ public class OrderServiceImpl implements OrderService{
     ShowTimeRepository showTimeRepository;
     @Override
     public Order getOrderById(Long id) {
-        return orderRepository.findById(id).get();
+        Optional<Order> entity = orderRepository.findById(id);
+        return InvoiceServiceImpl.unwrapOrder(entity, id);
     }
 
     @Override
@@ -37,6 +40,8 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void deleteOrder(Long id) {
+        Optional<Order> entity = orderRepository.findById(id);
+        InvoiceServiceImpl.unwrapOrder(entity, id);
         orderRepository.deleteById(id);
     }
 
@@ -75,35 +80,38 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order addPaymentToOrder(Long paymentId, Long orderId) {
-        Order order = getOrderById(orderId);
-        Optional<Payment> payment = paymentRepository.findById(paymentId);
-        if (payment.isPresent()){
-            order.setPayment(payment.get());
-            return orderRepository.saveAndFlush(order);
-        }
-        return null;
+        Optional<Order> entity = orderRepository.findById(orderId);
+        Order order = InvoiceServiceImpl.unwrapOrder(entity, orderId);
+        Optional<Payment> entityPayment = paymentRepository.findById(orderId);
+        Payment payment = unwrapPayment(entityPayment, paymentId);
+        order.setPayment(payment);
+        return orderRepository.saveAndFlush(order);
     }
     @Override
     public ShowTime getEnrolledShowTime(Long orderId) {
-        Order order = getOrderById(orderId);
+        Optional<Order> entity = orderRepository.findById(orderId);
+        Order order = InvoiceServiceImpl.unwrapOrder(entity, orderId);
         return order.getShowTimes();
     }
 
     @Override
     public Employee getEnrolledEmployee(Long orderId) {
-        Order order = getOrderById(orderId);
+        Optional<Order> entity = orderRepository.findById(orderId);
+        Order order = InvoiceServiceImpl.unwrapOrder(entity, orderId);
         return order.getEmployee();
     }
 
     @Override
     public Customer getEnrolledCustomer(Long orderId) {
-        Order order = getOrderById(orderId);
+        Optional<Order> entity = orderRepository.findById(orderId);
+        Order order = InvoiceServiceImpl.unwrapOrder(entity, orderId);
         return order.getCustomer();
     }
 
     @Override
     public Payment getEnrolledPayment(Long orderId) {
-        Order order = getOrderById(orderId);
+        Optional<Order> entity = orderRepository.findById(orderId);
+        Order order = InvoiceServiceImpl.unwrapOrder(entity, orderId);
         return order.getPayment();
     }
 }

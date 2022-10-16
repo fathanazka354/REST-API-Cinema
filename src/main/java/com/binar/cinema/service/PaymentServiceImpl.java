@@ -1,11 +1,14 @@
 package com.binar.cinema.service;
 
+import com.binar.cinema.entity.OrderDetail;
 import com.binar.cinema.entity.Payment;
+import com.binar.cinema.exception.DataNotFoundException;
 import com.binar.cinema.repository.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
@@ -13,7 +16,8 @@ public class PaymentServiceImpl implements PaymentService{
     PaymentRepository paymentRepository;
     @Override
     public Payment getPaymentById(Long id) {
-        return paymentRepository.findById(id).get();
+        Optional<Payment> entity = paymentRepository.findById(id);
+        return unwrapPayment(entity, id);
     }
 
     @Override
@@ -28,6 +32,13 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public void deletePayment(Long id) {
+        Optional<Payment> entity = paymentRepository.findById(id);
+        unwrapPayment(entity, id);
         paymentRepository.deleteById(id);
+    }
+
+    static Payment unwrapPayment(Optional<Payment> entity, Long id){
+        if (entity.isPresent()) return entity.get();
+        throw new DataNotFoundException(id);
     }
 }
