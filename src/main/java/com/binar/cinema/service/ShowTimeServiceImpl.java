@@ -9,6 +9,7 @@ import com.binar.cinema.repository.ShowTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,5 +73,15 @@ public class ShowTimeServiceImpl implements ShowTimeService{
     public Movie getEnrolledMovie(Long showtimeId) {
         ShowTime showTime = getShowTimeById(showtimeId);
         return showTime.getMovie();
+    }
+
+    @Override
+    public List<ShowTime> getCurrentFilmShowing(LocalDate date) {
+        return showTimeRepository.findFilmThatShowing(date);
+    }
+
+    @Override
+    public ShowTime getFilmByDate(LocalDate date) {
+        return showTimeRepository.findFilmByDate(date);
     }
 }

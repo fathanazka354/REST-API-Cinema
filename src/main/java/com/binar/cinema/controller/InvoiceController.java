@@ -11,7 +11,6 @@ import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,7 +40,6 @@ public class InvoiceController {
             System.out.println(jrBeanArrayDataSource.getData().length);
             JasperReport compileManager =  JasperCompileManager.compileReport(new FileInputStream("src/main/resources/invoice.jrxml"));
             HashMap<String, Object> map = new HashMap<>();
-//            JasperPrint jasperPrint = JasperFillManager.fillReport(compileManager, new HashMap<String, Object>(), conn);
             JasperPrint jasperPrint = JasperFillManager.fillReport(compileManager, map, jrBeanArrayDataSource);
             System.out.println(jasperPrint);
             JRPdfExporter exporter = new JRPdfExporter();
@@ -65,7 +63,6 @@ public class InvoiceController {
             exporter.setConfiguration(exportConfig);
 
             exporter.exportReport();
-//            JasperExportManager.exportReportToPdfFile(jasperPrint, "customer.pdf");
             return "generated";
         } catch (JRException e) {
             throw new RuntimeException(e);

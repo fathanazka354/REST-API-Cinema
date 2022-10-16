@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -24,6 +27,18 @@ public class ShowTimeController {
     @GetMapping
     public ResponseEntity<List<ShowTime>> getShowTimes(){
         return new ResponseEntity<>(showTimeService.getAllShowTime(), HttpStatus.OK);
+    }
+
+    @GetMapping("/date={date}")
+    public ResponseEntity<ShowTime> getDataByDate(@PathVariable("date") @RequestBody String searchKey){
+        return new ResponseEntity<>(showTimeService.getFilmByDate(LocalDate.parse(searchKey)), HttpStatus.OK);
+    }
+
+    @GetMapping("/current")
+    public ResponseEntity<List<ShowTime>> getCurrentData(){
+        DateTimeFormatter formatTanggal = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate getNow = LocalDate.now();
+        return new ResponseEntity<>(showTimeService.getCurrentFilmShowing(LocalDate.parse(formatTanggal.format(getNow))), HttpStatus.OK);
     }
 
     @PostMapping
