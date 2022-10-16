@@ -44,6 +44,10 @@ public class Movie {
     )
     private Set<Genre> genres;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private Set<ShowTime> showTimes;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+7")
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

@@ -1,6 +1,7 @@
 package com.binar.cinema.controller;
 
 import com.binar.cinema.entity.Seat;
+import com.binar.cinema.entity.Theater;
 import com.binar.cinema.service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,16 @@ public class SeatController {
     @PostMapping
     public ResponseEntity<Seat> postSeat(@RequestBody Seat seat){
         return new ResponseEntity<>(seatService.saveSeat(seat), HttpStatus.OK);
+    }
+
+    @PutMapping("/{seatId}/theater/{theaterId}")
+    public ResponseEntity<Seat> addSeatToTheater(@PathVariable Long seatId, @PathVariable Long theaterId){
+        return new ResponseEntity<>(seatService.addSeatToTheater(seatId, theaterId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{seatId}/theater")
+    public ResponseEntity<Theater> getEnrolledTheater(@PathVariable Long seatId){
+        return new ResponseEntity<>(seatService.getEnrolledTheater(seatId), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

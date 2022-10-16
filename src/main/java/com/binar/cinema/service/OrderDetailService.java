@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface OrderDetailService {
     OrderDetail getOrderDetailById(Long id);
-    OrderDetail saveOrderDetail(OrderDetail orderDetail);
+    OrderDetail saveOrderDetail(Long orderDetailId,Long orderId);
     List<OrderDetail> getAllOrder();
     void deleteOrderDetail(Long id);
 }

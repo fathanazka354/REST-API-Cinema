@@ -24,9 +24,9 @@ public class OrderDetailController {
         return new ResponseEntity<>(orderDetailService.getAllOrder(), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<OrderDetail> postOrderDetail(@RequestBody OrderDetail orderDetail){
-        return new ResponseEntity<>(orderDetailService.saveOrderDetail(orderDetail), HttpStatus.OK);
+    @PutMapping("/{orderDetailId}/order/{orderId}")
+    public ResponseEntity<OrderDetail> postOrderDetail(@PathVariable Long orderDetailId,@PathVariable Long orderId){
+        return new ResponseEntity<>(orderDetailService.saveOrderDetail(orderDetailId,orderId), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")

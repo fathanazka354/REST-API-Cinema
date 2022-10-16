@@ -1,6 +1,7 @@
 package com.binar.cinema.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -8,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,6 +26,10 @@ public class Theater {
 
     @Column(name = "theater_code")
     private String theaterCode;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
+    private Set<Seat> seats;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+7")
     @CreationTimestamp
