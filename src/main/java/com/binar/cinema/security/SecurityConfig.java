@@ -1,5 +1,9 @@
 package com.binar.cinema.security;
 
+import com.binar.cinema.security.filter.AuthenticationFilter;
+import com.binar.cinema.security.filter.ExceptionHandlerFilter;
+import com.binar.cinema.security.filter.JWTAuthorizationFilter;
+import com.binar.cinema.security.manager.CustomAuthenticationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,26 +17,32 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static com.binar.cinema.security.SecurityConstant.CUSTOMER_PATH;
-import static com.binar.cinema.security.SecurityConstant.MOVIE_PATH;
+import static com.binar.cinema.security.SecurityConstant.*;
 
 @Configuration
 public class SecurityConfig {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private CustomAuthenticationManager customAuthenticationManager;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        AuthenticationFilter authenticationFilter = new AuthenticationFilter(customAuthenticationManager);
+        authenticationFilter.setFilterProcessesUrl("/authenticate");
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("http://localhost:9000/api-docs.html").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, REGISTER_PATH).permitAll()
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, CUSTOMER_PATH).permitAll()
                 .antMatchers(HttpMethod.GET, MOVIE_PATH).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic()
-                .and()
+                .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
+                .addFilter(authenticationFilter)
+                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }

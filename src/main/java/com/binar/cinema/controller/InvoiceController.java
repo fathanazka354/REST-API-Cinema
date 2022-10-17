@@ -35,7 +35,6 @@ public class InvoiceController {
     @GetMapping("/order/{orderId}/pdf")
     public String generatePdf(@PathVariable Long orderId){
         JRBeanArrayDataSource jrBeanArrayDataSource = new JRBeanArrayDataSource(new Invoice[]{invoiceService.getInvoiceById(orderId)});
-        Connection conn;
         try {
             System.out.println(jrBeanArrayDataSource.getData().length);
             JasperReport compileManager =  JasperCompileManager.compileReport(new FileInputStream("src/main/resources/invoice.jrxml"));
@@ -64,12 +63,8 @@ public class InvoiceController {
 
             exporter.exportReport();
             return "generated";
-        } catch (JRException e) {
+        } catch (JRException | FileNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }finally {
-
         }
     }
 }

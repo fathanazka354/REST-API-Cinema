@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class PaymentController {
     }
 
     @PostMapping
-    public ResponseEntity<Payment> postOrderDetail(@RequestBody Payment payment){
+    public ResponseEntity<Payment> postOrderDetail(@Valid @RequestBody Payment payment){
         return new ResponseEntity<>(paymentService.savePayment(payment), HttpStatus.OK);
     }
 
