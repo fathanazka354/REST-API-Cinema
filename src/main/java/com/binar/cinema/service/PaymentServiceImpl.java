@@ -32,8 +32,6 @@ public class PaymentServiceImpl implements PaymentService{
 
     @Override
     public void deletePayment(Long id) {
-        Optional<Payment> entity = paymentRepository.findById(id);
-        unwrapPayment(entity, id);
         paymentRepository.deleteById(id);
     }
 
