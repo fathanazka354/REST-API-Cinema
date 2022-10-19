@@ -47,8 +47,6 @@ public class OrderDetailServiceImpl implements OrderDetailService{
 
     @Override
     public void deleteOrderDetail(Long id) {
-        Optional<OrderDetail> entity = orderDetailRepository.findById(id);
-        unwrapOrderDetail(entity,id);
         orderDetailRepository.deleteById(id);
     }
 

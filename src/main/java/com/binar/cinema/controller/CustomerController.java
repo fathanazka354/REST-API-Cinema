@@ -1,13 +1,14 @@
 package com.binar.cinema.controller;
 
+import com.binar.cinema.dto.ResponseData;
 import com.binar.cinema.entity.Customer;
 import com.binar.cinema.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,17 +18,23 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id){
-        return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
+    public ResponseEntity<ResponseData<Customer>> getCustomerById(@PathVariable Long id){
+        ResponseData responseData = new ResponseData();
+        responseData.setStatus(true);
+        responseData.setPayload(customerService.getCustomerById(id));
+        return ResponseEntity.ok(responseData);
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getCustomers(){
-        return new ResponseEntity<>(customerService.getAllCustomer(), HttpStatus.OK);
+    public ResponseEntity<ResponseData<List<Customer>>> getCustomers(){
+        ResponseData responseData = new ResponseData();
+        responseData.setStatus(true);
+        responseData.setPayload(customerService.getAllCustomer());
+        return ResponseEntity.ok(responseData);
     }
 
     @PostMapping
-    public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer){
+    public ResponseEntity<Customer> postCustomer(@Valid @RequestBody Customer customer){
         return new ResponseEntity<>(customerService.saveCustomer(customer), HttpStatus.OK);
     }
 

@@ -40,8 +40,6 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public void deleteOrder(Long id) {
-        Optional<Order> entity = orderRepository.findById(id);
-        InvoiceServiceImpl.unwrapOrder(entity, id);
         orderRepository.deleteById(id);
     }
 

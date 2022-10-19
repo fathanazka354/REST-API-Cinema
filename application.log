@@ -1,0 +1,2 @@
+2022-10-18 16:06:47.610 ERROR 10640 --- [http-nio-9000-exec-1] c.b.cinema.service.CustomerServiceImpl   : Id 10 Not present in request
+2022-10-18 16:07:06.058 ERROR 10640 --- [http-nio-9000-exec-5] c.b.cinema.service.CustomerServiceImpl   : Id 12 Not present in request

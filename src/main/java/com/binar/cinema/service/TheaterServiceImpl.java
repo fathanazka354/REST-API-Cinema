@@ -32,8 +32,6 @@ public class TheaterServiceImpl implements TheaterService{
 
     @Override
     public void deleteTheater(Long id) {
-        Optional<Theater> entity = theaterRepository.findById(id);
-        unwrapTheater(entity, id);
         theaterRepository.deleteById(id);
     }
     static Theater unwrapTheater(Optional<Theater> entity, Long id){

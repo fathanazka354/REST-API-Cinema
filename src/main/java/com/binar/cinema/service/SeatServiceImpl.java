@@ -38,8 +38,6 @@ public class SeatServiceImpl implements SeatService{
 
     @Override
     public void deleteSeat(Long id) {
-        Optional<Seat> entity = seatRepository.findById(id);
-        unwrapSeat(entity, id);
         seatRepository.deleteById(id);
     }
 

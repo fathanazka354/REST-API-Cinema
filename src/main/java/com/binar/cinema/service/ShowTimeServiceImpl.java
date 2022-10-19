@@ -44,8 +44,6 @@ public class ShowTimeServiceImpl implements ShowTimeService{
 
     @Override
     public void deleteShowTime(Long id) {
-        Optional<ShowTime> entity = showTimeRepository.findById(id);
-        unwrapShowTime(entity, id);
         showTimeRepository.deleteById(id);
     }
 

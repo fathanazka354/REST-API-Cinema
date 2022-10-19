@@ -34,8 +34,6 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public void deleteMovie(Long id) {
-        Optional<Movie> entity = movieRepository.findById(id);
-        unwrapMovie(entity, id);
         movieRepository.deleteById(id);
     }
 

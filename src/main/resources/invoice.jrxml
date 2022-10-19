@@ -1,60 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8a69cb79-99b7-4a2d-8465-b7418ff70a6f">
-<!--    <property name="com.jaspersoft.studio.data.sql.tables">-->
-<!--        <![CDATA[c2VhdHMgQVMgLDQzMyw0MSw5ZDI4MDQ3Zi1mYjYxLTQzMjctOWEzNi0yMjM3MTNmYThjMzU7c2hv-->
-<!--d3RpbWUgQVMgLDY1Myw4MyxhZWZiYjkwMy04ZGZlLTQ1ODQtYjMxYi0zM2I3YmJkMTYzODA7cGF5-->
-<!--bWVudCBBUyAsODYzLDUyLDU3NzFlMjc3LTNjMmItNDk0YS1hOTg2LTNhZGZkODZjZjg4ZDttb3Zp-->
-<!--ZXMgQVMgLDI0Miw0NSxhYjg1ZDhkNi0xNzA0LTQ3YjctODJkOS0xNWEzYjA1ODc1YTA7Y3VzdG9t-->
-<!--ZXIgQVMgLDQ4LDUxLGRhOTM3OTQ1LTkwMGQtNGNiZi1hYzU2LTFjYWI3MjFjODBlMTs=]]>-->
-<!--    </property>-->
+
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="Invoice"/>
-<!--    <queryString language="SQL">-->
-<!--        <![CDATA[SELECT customer.id,-->
-<!--	customer.first_name,-->
-<!--	movies.movie_name,-->
-<!--	payment.cash,-->
-<!--	seats.seat_code,-->
-<!--	showtime.date_showtime,-->
-<!--	seats.seat_code,-->
-<!--	movies.movie_name-->
-<!--FROM customer,-->
-<!--	payment,-->
-<!--	showtime-->
-<!--	INNER JOIN movies ON-->
-<!--	 showtime.movie_id = movies.id-->
-<!--	INNER JOIN seats ON-->
-<!--	 showtime.seat_id = seats.id]]>-->
-<!--    </queryString>-->
+
     <field name="customerId" class="java.lang.Long">
-<!--        <property name="com.jaspersoft.studio.field.name" value="id"/>-->
-<!--        <property name="com.jaspersoft.studio.field.label" value="id"/>-->
-<!--        <property name="com.jaspersoft.studio.field.tree.path" value="customer"/>-->
     </field>
     <field name="firstName" class="java.lang.String">
-<!--        <property name="com.jaspersoft.studio.field.name" value="first_name"/>-->
-<!--        <property name="com.jaspersoft.studio.field.label" value="first_name"/>-->
-<!--        <property name="com.jaspersoft.studio.field.tree.path" value="customer"/>-->
     </field>
     <field name="movieName" class="java.lang.String">
-<!--        <property name="com.jaspersoft.studio.field.name" value="movie_name"/>-->
-<!--        <property name="com.jaspersoft.studio.field.label" value="movie_name"/>-->
-<!--        <property name="com.jaspersoft.studio.field.tree.path" value="movies"/>-->
     </field>
     <field name="cash" class="java.lang.Double">
-<!--        <property name="com.jaspersoft.studio.field.name" value="cash"/>-->
-<!--        <property name="com.jaspersoft.studio.field.label" value="cash"/>-->
-<!--        <property name="com.jaspersoft.studio.field.tree.path" value="payment"/>-->
     </field>
     <field name="seatCode" class="java.lang.String">
-<!--        <property name="com.jaspersoft.studio.field.name" value="seat_code"/>-->
-<!--        <property name="com.jaspersoft.studio.field.label" value="seat_code"/>-->
-<!--        <property name="com.jaspersoft.studio.field.tree.path" value="seats"/>-->
     </field>
     <field name="dateShowtime" class="java.time.LocalDate">
-<!--        <property name="com.jaspersoft.studio.field.name" value="date_showtime"/>-->
-<!--        <property name="com.jaspersoft.studio.field.label" value="date_showtime"/>-->
-<!--        <property name="com.jaspersoft.studio.field.tree.path" value="showtime"/>-->
     </field>
     <group name="id">
         <groupExpression><![CDATA[$F{customerId}]]></groupExpression>
