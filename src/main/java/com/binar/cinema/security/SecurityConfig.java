@@ -30,23 +30,37 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(customAuthenticationManager);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("http://localhost:9000/api-docs.html").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, REGISTER_PATH).permitAll()
-                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, CUSTOMER_PATH).permitAll()
-                .antMatchers(HttpMethod.GET, MOVIE_PATH).permitAll()
-                .anyRequest().authenticated()
-                .and()
+//        Way 1
+
+//        http
+//                .csrf().disable()
+//                .authorizeRequests()
+////                .anyRequest().authenticated()
+//                .antMatchers("/swagger-ui/**").permitAll()
+////                .antMatchers("/api-docs.html").permitAll()
+//                .antMatchers(HttpMethod.POST, REGISTER_PATH).permitAll()
+//                .antMatchers(HttpMethod.DELETE).authenticated()
+//                .antMatchers(PAYMENT_PATH).permitAll()
+//                .antMatchers(HttpMethod.GET, MOVIE_PATH).authenticated()
+////                .antMatchers(HttpMethod.GET, ).authenticated()
+//                .and()
+//                .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
+//                .addFilter(authenticationFilter)
+//                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+//        Way 2
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers(EMPLOYEE_PATH).authenticated()
+                .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN")
+                .anyRequest().authenticated().and()
+                .userDetailsService(users())
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
                 .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
         return http.build();
     }
-
     @Bean
     public UserDetailsService users(){
         UserDetails admin = User.builder()

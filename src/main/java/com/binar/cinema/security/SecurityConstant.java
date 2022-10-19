@@ -2,7 +2,11 @@ package com.binar.cinema.security;
 
 public class SecurityConstant {
     public static final String MOVIE_PATH = "/movie";
+    public static final String CUSTOMER_PATH_DATA = "/customer/*";
     public static final String CUSTOMER_PATH = "/customer";
+    public static final String EMPLOYEE_PATH = "/employee";
+    public static final String PAYMENT_PATH = "/payment";
+//    public static final String MOVIE_PATH = "/movie";
     public static final String REGISTER_PATH = "/user/register";
     public static final String AUTHORIZATION = "Authorization";
     public static final String BEARER = "Bearer ";
