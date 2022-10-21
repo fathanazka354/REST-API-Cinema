@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-
 import java.util.List;
 
 import static com.binar.cinema.security.SecurityConstant.*;
@@ -52,13 +50,7 @@ public class SecurityConfig {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 //        Way 2
-        http.cors().configurationSource(request -> {
-            var cors = new CorsConfiguration();
-            cors.setAllowedOrigins(List.of("https://rest-api-cinema-production.up.railway.app/"));
-            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
-            cors.setAllowedHeaders(List.of("*"));
-            return cors;
-        }).and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
+        http.cors().and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
                 .antMatchers(EMPLOYEE_PATH).authenticated()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN")
