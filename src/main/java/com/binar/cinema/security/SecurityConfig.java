@@ -66,7 +66,6 @@ public class SecurityConfig {
                 .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN").and()
                 .userDetailsService(users())
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
-                .addFilter(corsFilter())
                 .addFilter(authenticationFilter)
                 .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
