@@ -4,10 +4,10 @@ import com.binar.cinema.security.filter.AuthenticationFilter;
 import com.binar.cinema.security.filter.ExceptionHandlerFilter;
 import com.binar.cinema.security.filter.JWTAuthorizationFilter;
 import com.binar.cinema.security.manager.CustomAuthenticationManager;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
@@ -16,6 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+
+import java.util.List;
 
 import static com.binar.cinema.security.SecurityConstant.*;
 
@@ -30,6 +33,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(customAuthenticationManager);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
+//        var cors = new CorsConfiguration();
 //        Way 1
 
 //        http
@@ -50,7 +54,14 @@ public class SecurityConfig {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 //        Way 2
-        http.cors().and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
+        http.cors().configurationSource(request -> {
+            var cors = new CorsConfiguration();
+            cors.setAllowedOrigins(List.of("https://rest-api-cinema-production.up.railway.app/"));
+            cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+            cors.setAllowedHeaders(List.of("*"));
+            return cors;
+        })
+                .and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
                 .antMatchers(EMPLOYEE_PATH).authenticated()
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN")
