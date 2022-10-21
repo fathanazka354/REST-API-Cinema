@@ -53,8 +53,6 @@ public class SecurityConfig {
         http.cors().and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
                 .antMatchers(EMPLOYEE_PATH).authenticated()
                 .antMatchers("/swagger-ui/**").permitAll()
-                .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN")
-                .anyRequest().authenticated().and()
                 .userDetailsService(users())
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
