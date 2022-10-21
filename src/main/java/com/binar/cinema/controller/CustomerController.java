@@ -19,7 +19,7 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "https://rest-api-cinema-production.up.railway.app")
+    @CrossOrigin(origins = "https://rest-api-cinema-production.up.railway.app",maxAge = 3600, allowCredentials = "true")
     public ResponseEntity<ResponseData<Customer>> getCustomerById(@PathVariable Long id){
         ResponseData responseData = new ResponseData();
         responseData.setStatus(true);
@@ -28,7 +28,7 @@ public class CustomerController {
     }
 
     @GetMapping
-    @CrossOrigin(origins = "https://rest-api-cinema-production.up.railway.app")
+    @CrossOrigin(origins = "https://rest-api-cinema-production.up.railway.app",maxAge = 3600, allowCredentials = "true")
     public ResponseEntity<ResponseData<List<Customer>>> getCustomers(){
         ResponseData responseData = new ResponseData();
         responseData.setStatus(true);
