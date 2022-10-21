@@ -49,6 +49,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .withSubject(authResult.getName())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION))
                 .sign(Algorithm.HMAC512(GENERATED_KEY));
+        response.setHeader("Access-Control-Allow-Headers", "*");
         response.addHeader(AUTHORIZATION, BEARER + token);
     }
 }
