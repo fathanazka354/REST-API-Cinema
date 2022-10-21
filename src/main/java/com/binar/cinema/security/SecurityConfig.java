@@ -49,10 +49,11 @@ public class SecurityConfig {
 //                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-//        Way 2
         http.cors().and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
                 .antMatchers(EMPLOYEE_PATH).authenticated()
                 .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN")
+                .anyRequest().authenticated().and()
                 .userDetailsService(users())
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
