@@ -30,6 +30,12 @@ public class SecurityConfig {
     @Autowired
     private CustomAuthenticationManager customAuthenticationManager;
     @Bean
+    CorsFilter corsFilter() {
+        CorsFilter filter = new CorsFilter();
+        return filter;
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(customAuthenticationManager);
         authenticationFilter.setFilterProcessesUrl("/authenticate");
@@ -59,6 +65,7 @@ public class SecurityConfig {
                 .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN").and()
                 .userDetailsService(users())
+                .addFilter(corsFilter())
                 .addFilterBefore(new ExceptionHandlerFilter(), AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
                 .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
