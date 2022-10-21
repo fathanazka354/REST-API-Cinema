@@ -50,8 +50,9 @@ public class SecurityConfig {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 //        Way 2
-        http.cors().and().csrf().disable().authorizeRequests()
+        http.cors().and().csrf().disable().antMatcher("/swagger-ui/**").authorizeRequests()
                 .antMatchers(EMPLOYEE_PATH).authenticated()
+                .antMatchers("/swagger-ui/**").permitAll()
                 .antMatchers(CUSTOMER_PATH, MOVIE_PATH).hasRole("ADMIN")
                 .anyRequest().authenticated().and()
                 .userDetailsService(users())
