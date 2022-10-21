@@ -29,11 +29,6 @@ public class SecurityConfig {
     private BCryptPasswordEncoder passwordEncoder;
     @Autowired
     private CustomAuthenticationManager customAuthenticationManager;
-    @Bean
-    CorsFilter corsFilter() {
-        CorsFilter filter = new CorsFilter();
-        return filter;
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
