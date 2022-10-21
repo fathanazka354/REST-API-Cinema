@@ -53,6 +53,7 @@ public class SecurityConfig {
 //                .addFilterAfter(new JWTAuthorizationFilter(), AuthenticationFilter.class)
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
+//        Way 2
         http.cors().configurationSource(request -> {
             var cors = new CorsConfiguration();
             cors.setAllowedOrigins(List.of("https://rest-api-cinema-production.up.railway.app/"));
