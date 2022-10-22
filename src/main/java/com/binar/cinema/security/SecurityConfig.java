@@ -54,7 +54,7 @@ public class SecurityConfig {
 //                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 //        Way 2
-        http.csrf().disable().cors().configurationSource(configurationSource()).and()
+        http.csrf().disable().cors().and()
                 .antMatcher("/swagger-ui/**").authorizeRequests()
                 .antMatchers(EMPLOYEE_PATH).authenticated()
                 .antMatchers("/swagger-ui/**").permitAll()
