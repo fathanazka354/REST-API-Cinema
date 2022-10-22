@@ -13,8 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = {"https://rest-api-cinema-production.up.railway.app/", "https://rest-api-cinema-production.up.railway.app/swagger-ui/index.html#"},
-methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
+@CrossOrigin(origins = {"https://rest-api-cinema-production.up.railway.app/", "http://rest-api-cinema-production.up.railway.app/", "https://rest-api-cinema-production.up.railway.app/swagger-ui/index.html#"},
+methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT}, allowCredentials = "true")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
