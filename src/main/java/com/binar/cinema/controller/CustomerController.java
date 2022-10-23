@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/customer")
-@CrossOrigin(origins = {"https://rest-api-cinema-production.up.railway.app", "http://rest-api-cinema-production.up.railway.app", "https://rest-api-cinema-production.up.railway.app/swagger-ui/index.html#"})
 public class CustomerController {
     @Autowired
     CustomerService customerService;
