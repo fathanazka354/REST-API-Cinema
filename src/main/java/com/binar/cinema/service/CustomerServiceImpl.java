@@ -32,6 +32,11 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
         return customerRepository.save(customer);
     }
+    @Override
+    public List<Customer> saveCustomers(List<Customer> customer) {
+        return customerRepository.saveAll(customer);
+    }
+
 
     @Override
     public List<Customer> getAllCustomer() {
