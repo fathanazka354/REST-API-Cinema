@@ -38,6 +38,11 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.saveCustomer(customer), HttpStatus.OK);
     }
 
+    @PostMapping("/saveAll")
+    public ResponseEntity<List<Customer>> postCustomers(@Valid @RequestBody List<Customer> customer){
+        return new ResponseEntity<>(customerService.saveCustomers(customer), HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable Long id){
         customerService.deleteCustomer(id);
