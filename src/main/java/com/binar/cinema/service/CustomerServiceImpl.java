@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Service
 @Slf4j
-//@PropertySource("classpath:application.properties")
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
@@ -37,6 +36,11 @@ public class CustomerServiceImpl implements CustomerService {
         Runnable runnable = () -> {
             for (int i = 0; i < customer.size(); i++){
                 customers[i] = customerRepository.saveAll(customer);
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         };
 
