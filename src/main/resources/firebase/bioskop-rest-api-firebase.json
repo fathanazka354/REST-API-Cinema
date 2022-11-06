@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bioskop-rest-api",
+  "private_key_id": "5cc3de4563086113f9c199e06102fa28699da4c3",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCtLmd4YIdVdgVL\n4Gk3sV4oqS4nHqNa/o9Q+ynLoYns8XhO2hC32SUtpLeMx9pfEhuzSPbc3BrBYhfc\nAHC5rqgmw1nYpiWYO+x0Mj9VHK73RBcK8oHM1uZsggDGtLRFpiR8RB4Vflogg+Wv\ntGHE5ku1VUWxIOzwNen1kd/kfboBETlnYWlZ1/xxxfyr9WZ+poDDi734Xez4NR3k\nsnZ6yiTHtikXsrz/Boa1QG1H00ysDUHnETYtcRdQI6dJk1Y3CXrJHo48SZkCwR6i\n+yL/cRg7U18UiZSe6ncgYoBD0f8aPsKBag+jn8AAJekhbKyL1YxM6Otp/rFND3Sl\nkUnxLpqlAgMBAAECggEANtj/hCxuMC7Utpc4O589Bvut1k3pxqPgl/Ez534dxKEl\nTTPbH57yG2aTi06wZnPBuiJdrM043A5JKDArg2NBdiVgizDzrycrWBGh5T7UWxOB\niMINQea9y5fQzx3kCjr4SzL3pC8ENFARqngijs2xJJkBHXwkDl/E3TV6B0+aXUOl\nXdyoqktmN6Q92Z1LyRKlz++/QbMvDtrtzGEt6KvsNH6HhYAAgUiQRnXb8+KVack8\nEFZ+rnUOcX23tFQMEhEHbPfIp8xVSvMLvZkceHGyFlXYNcq1oTJYAJuajAMngD6G\n0HnfBkAjmzqC8yhbsdMmR39Ne+JcMfOgUpXYx+858QKBgQDltitUYAEufFu8+t+V\n+UFtlGVTLLm6rCElXL/SdMOXQ5YJatkIOhfIms1NOmua8ncY48zmhI2V1Mwp0ZW/\nKFxqKKVHxYcQvn9fcWIe74qrSVc+PvQDO84hQTU1ucCWgef8I6bDETuS6ZJaAMsT\n5EUK3WlYA9Toe4rCz84nZyFtPwKBgQDBABK6EG8L4tWurELKeRSS4YbT9cr26/99\nGmMYukYJSvYwTP+FfYgOlLmlCdJXPWCb2HYzekUtoUdLHyQdqrWhf996RVz8tNXd\n+I5I3Y0ySQ/t+Wo1n/2VuXC+IuMjYqMoQmw6kCHYyEFjpIM4U1B3onEoZrU0XXv7\nz3hNJJGrGwKBgQC05YK1zWzgyLoN1pqgpkuqGcS5fW093jO0EphVCfLFekn7XJNR\ncT4tkgq/GJSIzwyPI0XG+vfs2El3XT9J7GTqjNur65fzzbDM3qNgrU9MmFMGB9lt\nenlXotxeVMufOuoPm5vF3hpGFX5VNm62WXstlTNSRqIx+qhJxhAY45RlTQKBgGW1\nTSkiyfKAms1PWG9tOYtiMHR5Hnnbyqs6AakhWRFCoNS5bxsBGXddpyuzLlbtMIFQ\npJHiSJyQVorfIWBE+yzdv36nGSbPgblVaF4761HpsOxfOTqDUtbZf/GjXwHh1Eu+\nHV0LYdrlRZhmNQS02z4ArBN3dNzguxrrreExeVarAoGADRFdQdWkMsOeT8CCW1j7\nE9XmIJLwsDPMfIz4YmR2hcY5pZNNge2ctWKP2Q55qI5lD+qWzz37VG8zuxZqBK8Y\n9mae9pBq8o8OUfXIQO5d5JELsGfe9XjIQpDic9AQZkTliy0jLFu2+TUv5ztlTqlN\nOYmkKRzRLvh14SH8fh0OuRU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-w1cob@bioskop-rest-api.iam.gserviceaccount.com",
+  "client_id": "112332121516386253985",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-w1cob%40bioskop-rest-api.iam.gserviceaccount.com"
+}
