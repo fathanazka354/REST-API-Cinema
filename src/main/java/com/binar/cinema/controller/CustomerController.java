@@ -35,12 +35,12 @@ public class CustomerController {
 
     @PostMapping
     public ResponseEntity<Customer> postCustomer(@Valid @RequestBody Customer customer){
-        return new ResponseEntity<>(customerService.saveCustomer(customer), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.saveCustomer(customer), HttpStatus.CREATED);
     }
 
     @PostMapping("/saveAll")
-    public ResponseEntity<List<Customer>> postCustomers(@Valid @RequestBody List<Customer> customer){
-        return new ResponseEntity<>(customerService.saveCustomers(customer), HttpStatus.OK);
+    public ResponseEntity<List<Customer>[]> postCustomers(@Valid @RequestBody List<Customer> customer) throws InterruptedException {
+        return new ResponseEntity<>(customerService.saveCustomers(customer), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete/{id}")

@@ -4,12 +4,11 @@ import com.binar.cinema.entity.Customer;
 import com.binar.cinema.exception.DataNotFoundException;
 import com.binar.cinema.repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +32,18 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(customer);
     }
     @Override
-    public List<Customer> saveCustomers(List<Customer> customer) {
-        return customerRepository.saveAll(customer);
+    public List<Customer>[] saveCustomers(List<Customer> customer) throws InterruptedException {
+        final List[] customers = new List[]{new ArrayList<>()};
+        Runnable runnable = () -> {
+            for (int i = 0; i < customer.size(); i++){
+                customers[i] = customerRepository.saveAll(customer);
+            }
+        };
+
+        Thread thread = new Thread(runnable);
+        thread.start();
+        thread.join();
+        return customers;
     }
 
 
