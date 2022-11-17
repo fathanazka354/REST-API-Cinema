@@ -31,11 +31,11 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.save(customer);
     }
     @Override
-    public List<Customer>[] saveCustomers(List<Customer> customer) throws InterruptedException {
-        final List[] customers = new List[]{new ArrayList<>()};
+    public List<Customer> saveCustomers(List<Customer> customer) throws InterruptedException {
+        final List customers = new ArrayList();
         Runnable runnable = () -> {
-            for (int i = 0; i < customer.size(); i++){
-                customers[i] = customerRepository.saveAll(customer);
+            for (int i = 0; i < customer.size() -1; i++){
+                customers.set(i, customerRepository.saveAll(customer));
             }
             try {
                 Thread.sleep(1000);
@@ -57,8 +57,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(Long id) {
+    public boolean deleteCustomer(Long id) {
         customerRepository.deleteById(id);
+        if (customerRepository.findById(id).isEmpty()){
+            return true;
+        }
+        return false;
     }
 
     static Customer unwrapCustomer(Optional<Customer> entity, Long id){

@@ -35,8 +35,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public boolean deleteEmployee(Long id) {
+        Optional<Employee> employeeById = employeeRepository.findById(id);
         employeeRepository.deleteById(id);
+        return employeeById.isEmpty();
     }
 
     static Employee unwrapEmployee(Optional<Employee> entity, Long id){
