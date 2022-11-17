@@ -39,7 +39,7 @@ public class CustomerController {
     }
 
     @PostMapping("/saveAll")
-    public ResponseEntity<List<Customer>[]> postCustomers(@Valid @RequestBody List<Customer> customer) throws InterruptedException {
+    public ResponseEntity<List<Customer>> postCustomers(@Valid @RequestBody List<Customer> customer) throws InterruptedException {
         return new ResponseEntity<>(customerService.saveCustomers(customer), HttpStatus.CREATED);
     }
 
